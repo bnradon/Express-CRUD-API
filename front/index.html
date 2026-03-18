@@ -3,26 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <title>CRUD :)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <div class="page-wrapper">
 
-      <!-- Input para nombre -->
-    <form id="item-form">
-      <input type="text" id="item-name" placeholder="Nombre del ítem" required>
+    <header class="header">
+      <h1 class="logo">Mis items :)</h1>
+      <p class="subtitle"> </p>
+    </header>
+
+    <form id="item-form" class="form-card">
+      <div class="form-row">
+        <input type="text" id="item-name" placeholder="Nombre del ítem" required>
+        <input type="number" id="item-price" placeholder="Precio" min="0" required>
+        <button id="add-button" type="submit">+ Agregar</button>
+      </div>
+    </form>
+
+   <table>
+  <thead>
+    <tr>
+      <th>Nombre  </th>
+      <th>Precio  </th>
+      <th>Acciones  </th>
+    </tr>
+  </thead>
+
+  <tbody id="item-list">
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+   
+    <!-- <section class="list-section">
+      <h2 class="list-title">Lista de ítems</h2>
+        <div id="item-card" class="card">
+      <div id="item-list" class="item-list"> 
         
-      <!-- Input para precio -->
-       <input type="number" id="item-price" placeholder="Precio del ítem" required>
-      
-      <!-- Boton agregar -->
-       <button id="add-button" type="submit" > Agregar</button>
+      </div>
+    </section> -->
 
-      <div id="item-list" class="d-flex">
-        <h1></h1>
-
-      </div> 
-
+  </div>
+  <h3 class="error-text"></h3>
+</div>
   <script src="app.js"></script>
 </body>
 </html>

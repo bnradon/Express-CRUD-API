@@ -1,12 +1,7 @@
 [
   {
-    "id": 1,
-    "name": "Camiseta",
-    "price": "25000"
-  },
-  {
     "id": 2,
-    "name": "Pantalon",
-    "price": "40000"
+    "name": "Camisa",
+    "price": 40000
   }
 ]
