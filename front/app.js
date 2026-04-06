@@ -81,12 +81,12 @@ function renderItems(items) {
     .join("");
 
   itemList.querySelectorAll(".btn-delete").forEach((btn) => {
-    btn.addEventListener("click", () => deleteItem(Number(btn.dataset.id)));
+    btn.addEventListener("click", () => deleteItem(btn.dataset.id));
   });
 
   itemList.querySelectorAll(".btn-edit").forEach((btn) => {
     btn.addEventListener("click", () =>
-      startEdit(Number(btn.dataset.id), btn.dataset.name, Number(btn.dataset.price)),
+      startEdit(btn.dataset.id, btn.dataset.name, Number(btn.dataset.price)),
     );
   });
 
@@ -199,3 +199,4 @@ itemForm.addEventListener("submit", async (e) => {
   itemName.value  = "";
   itemPrice.value = "";
 });
+
