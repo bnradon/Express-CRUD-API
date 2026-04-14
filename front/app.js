@@ -20,7 +20,7 @@ const statusTexts = [document.getElementById("status-text")];
 // estado vacío
 const emptyState  = document.getElementById("empty-state");
 
-const API = "http://localhost:3000/items";
+const API = "https://express-crud-api-bnradon.onrender.com/items";
 
 let itemsData  = [];
 let editingID  = null;
