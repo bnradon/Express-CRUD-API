@@ -117,8 +117,6 @@ FIREBASE_PRIVATE_KEY= "YOUR_KEY"
 
 ---
 
----
-
 ## What I'd improve next
 
 - Add authentication (users & roles)
