@@ -1,6 +1,6 @@
 # Express CRUD API
 
-A lightweight inventory manager built with Node.js and Express. The goal was to go beyond Postman - building a real frontend that talks to a REST API I wrote :).
+A lightweight inventory manager built with Node.js and Express powered by Firebase for real-time data persistence.. The goal was to go beyond Postman - building a real frontend that talks to a REST API I wrote :).
 
 This started as a university exercise. I wanted to see what it actually felt like to connect a backend to a real UI, handle errors, and ship something that looks decent.
 
@@ -13,6 +13,7 @@ This started as a university exercise. I wanted to see what it actually felt lik
 - Real-time stats (total products, total value)
 - Error handling for when the server is down
 - Delete confirmation to avoid any accident
+- Data is stored and synced using Firebase
 
 ## Tech stack
 
@@ -20,8 +21,13 @@ This started as a university exercise. I wanted to see what it actually felt lik
 |-------|-----------|
 | Backend | Node.js, Express |
 | Frontend | Vanilla JS, HTML, CSS |
-| Storage | JSON file |
+| Database | Firebase (Firestore / Realtime DB) |
+| Deployment | Vercel |
 | Logging | Custom event-based logger |
+
+Live Demo
+
+View Live App
 
 ## Project structure
 
@@ -31,7 +37,7 @@ This started as a university exercise. I wanted to see what it actually felt lik
 │   ├── routes/         # API endpoints
 │   └── utils/          # Logger
 ├── front/              # Frontend (HTML, CSS, JS)
-├── data/               # JSON storage
+├── data/               # Firebase configuration
 └── server.js
 ```
 
@@ -39,6 +45,7 @@ This started as a university exercise. I wanted to see what it actually felt lik
 
 - REST API design
 - Client-server communication
+- Cloud database integration (Firebase)
 - State management in frontend
 - Async operations with fetch
 
@@ -56,6 +63,21 @@ npm install
 node server.js
 
 # Then open frontend
+
+// config/firebase.js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+
+
 ```
 
 `front/index.html` in your browser.
