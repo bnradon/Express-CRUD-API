@@ -8,8 +8,8 @@ This started as a university exercise. At first, the goal was just to go beyond 
 
 ## Live Demo
 
-- Frontend: https://tu-app.vercel.app  
-- API: https://express-crud-api-bnradon.onrender.com/items  
+- [Frontend:](https://express-crud-api-bnradon.vercel.app/)
+- [API:](https://express-crud-api-bnradon.onrender.com/items)
 
 ---
 
