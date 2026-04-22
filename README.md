@@ -8,7 +8,7 @@ This started as a university exercise. At first, the goal was just to go beyond 
 
 ## Live Demo
 
-- Frontend: https://tu-app.vercel.app  
+- Frontend: https://express-crud-api-bnradon.vercel.app/  
 - API: https://express-crud-api-bnradon.onrender.com/items  
 
 ---
@@ -95,6 +95,7 @@ npm start
 
 // front/index.html in your browser
 
+
 ## Enviroment variables 
 
 For deployment, Firebase credentials are handled using environment variables instead of local JSON files:
@@ -102,13 +103,13 @@ For deployment, Firebase credentials are handled using environment variables ins
 FIREBASE_PROJECT_ID= "YOUR_KEY",
 FIREBASE_CLIENT_EMAIL= "YOUR_EMAIL",
 FIREBASE_PRIVATE_KEY= "YOUR_KEY"
-
 ```
+
 ---
 
 ## What I improved from the initial version
 
-- Deployed backend to production (Render)
+  Deployed backend to production (Render)
 - Deployed frontend (Vercel)
 - Connected frontend to a live API instead of localhost
 - Moved Firebase credentials to environment variables
@@ -117,7 +118,6 @@ FIREBASE_PRIVATE_KEY= "YOUR_KEY"
 
 ---
 
----
 
 ## What I'd improve next
 
