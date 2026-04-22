@@ -24,20 +24,20 @@ exports.createItem = async (req, res) => {
 
   const ref = await collection.add({ name, price: Number(price) });
 
-  console.log("Item creado:", ref.id);
-
-  fetch("https://forestless-nonreverently-loralee.ngrok-free.dev/webhook/new-item", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ id: ref.id, name, price: Number(price) })
-  })
-  .then(res => console.log("Webhook enviado"))
-  .catch(err => console.error("Error n8n:", err));
+  try {
+    await fetch("https://forestless-nonreverently-loralee.ngrok-free.dev/webhook/new-item", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: ref.id, name, price: Number(price) })
+    });
+    console.log("Webhook enviado");
+  } catch (err) {
+    console.error("Error n8n:", err);
+  }
 
   res.status(201).json({ id: ref.id, name, price: Number(price) });
 };
+
 
 exports.updateItem = async (req, res) => {
   const { name, price } = req.body;
