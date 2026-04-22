@@ -8,8 +8,8 @@ This started as a university exercise. At first, the goal was just to go beyond 
 
 ## Live Demo
 
-- Frontend: https://express-crud-api-bnradon.vercel.app/  
-- API: https://express-crud-api-bnradon.onrender.com/items  
+- [Frontend:](https://express-crud-api-bnradon.vercel.app/)
+- [API:](https://express-crud-api-bnradon.onrender.com/items)
 
 ---
 
@@ -116,8 +116,8 @@ FIREBASE_PRIVATE_KEY= "YOUR_KEY"
 - Handled CORS issues between frontend and backend
 - Structured project for real-world usage
 
----
 
+---
 
 ## What I'd improve next
 
