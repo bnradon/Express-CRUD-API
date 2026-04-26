@@ -14,6 +14,7 @@ exports.getItemById = async (req, res) => {
 };
 
 exports.createItem = async (req, res) => {
+  console.log("Creando ítem...");
   const { name, price } = req.body;
 
   if (!name || !price) {
@@ -23,7 +24,7 @@ exports.createItem = async (req, res) => {
   const ref = await collection.add({ name, price: Number(price) });
 
   try {
-    await fetch("https://n8n-production-5758.up.railway.app/webhook/new-test", {
+    await fetch("https://n8n-production-5758.up.railway.app/webhook-test/prueba", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: ref.id, name, price: Number(price) })
@@ -32,6 +33,7 @@ exports.createItem = async (req, res) => {
   } catch (err) {
     console.error("Error n8n:", err);
   }
+
 
   res.status(201).json({ id: ref.id, name, price: Number(price) });
 };

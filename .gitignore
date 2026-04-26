@@ -4,3 +4,4 @@ data/items.json
 serviceAccountKey.json
 file_server.js
 .env
+log.txt

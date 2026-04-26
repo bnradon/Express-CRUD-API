@@ -1,38 +1,40 @@
-const itemForm    = document.getElementById("item-form");
-const itemName    = document.getElementById("item-name");
-const itemPrice   = document.getElementById("item-price");
-const itemList    = document.getElementById("item-list");
-const addButton   = document.getElementById("add-button");
+const itemForm = document.getElementById("item-form");
+const itemName = document.getElementById("item-name");
+const itemPrice = document.getElementById("item-price");
+const itemList = document.getElementById("item-list");
+const addButton = document.getElementById("add-button");
 
 // stats
-const statCount   = document.getElementById("stat-count");
-const statTotal   = document.getElementById("stat-total");
+const statCount = document.getElementById("stat-count");
+const statTotal = document.getElementById("stat-total");
 
 // barrita de error
-const errorBar    = document.getElementById("error-bar");
-const errorMsg    = document.getElementById("error-msg");
-const errorClose  = document.getElementById("error-close");
+const errorBar = document.getElementById("error-bar");
+const errorMsg = document.getElementById("error-msg");
+const errorClose = document.getElementById("error-close");
 
 // ptos de estado
-const statusDots  = [document.getElementById("status-dot")];
+const statusDots = [document.getElementById("status-dot")];
 const statusTexts = [document.getElementById("status-text")];
 
 // estado vacío
-const emptyState  = document.getElementById("empty-state");
+const emptyState = document.getElementById("empty-state");
 
 const API = "https://express-crud-api-bnradon.onrender.com/items";
 
-// const API = "http://localhost:3000/items";
+// const API = "https://n8n-production-5758.up.railway.app/webhook-test/prueba";
 
-let itemsData  = [];
-let editingID  = null;
+let itemsData = [];
+let editingID = null;
 
 function setStatus(online) {
-  statusDots.forEach(dot => {
+  statusDots.forEach((dot) => {
     dot.classList.toggle("online", online);
     dot.classList.toggle("offline", !online);
   });
-  statusTexts.forEach(el => (el.textContent = online ? "API online" : "API no disponible :("));
+  statusTexts.forEach(
+    (el) => (el.textContent = online ? "API online" : "API no disponible :("),
+  );
 }
 
 function showError(msg) {
@@ -143,7 +145,6 @@ async function deleteItem(id) {
       renderItems(itemsData);
       hideError();
       alert("Eliminado correctamente");
-
     } else {
       return;
     }
@@ -157,7 +158,7 @@ async function deleteItem(id) {
 
 function startEdit(id, name, price) {
   editingID = id;
-  itemName.value  = name;
+  itemName.value = name;
   itemPrice.value = price;
   addButton.textContent = "Actualizar";
   itemName.focus();
@@ -187,7 +188,7 @@ async function updateItem(id, name, price) {
 itemForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const name  = itemName.value.trim();
+  const name = itemName.value.trim();
   const price = Number(itemPrice.value);
 
   if (editingID !== null) {
@@ -198,7 +199,6 @@ itemForm.addEventListener("submit", async (e) => {
     await addItem(name, price);
   }
 
-  itemName.value  = "";
+  itemName.value = "";
   itemPrice.value = "";
 });
-
