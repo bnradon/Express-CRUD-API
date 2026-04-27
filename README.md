@@ -1,27 +1,30 @@
 # Express CRUD API
 
-A lightweight inventory manager built with Node.js and Express, powered by Firebase for real-time data persistence.
+A lightweight inventory manager built with Node.js and Express, powered by Firebase for real-time data persistence and automated workflows using n8n.
 
-This started as a university exercise. At first, the goal was just to go beyond Postman and connect a backend to a real UI. But it ended up becoming a fully deployed full-stack app with a public API, cloud database and live frontend.
+This started as a university exercise. The initial goal was to connect a backend to a real UI beyond Postman. It evolved into a fully deployed full-stack app with a public API, cloud database, automation workflows and live frontend.
 
 ---
 
 ## Live Demo
 
-- [Frontend:](https://express-crud-api-bnradon.vercel.app/)
-- [API:](https://express-crud-api-bnradon.onrender.com/items)
+- Frontend: https://express-crud-api-bnradon.vercel.app/
+- API: https://express-crud-api-bnradon.onrender.com/items
+- Google Sheets Sync: https://docs.google.com/spreadsheets/d/1yjLuSYvkeEuaXs22j4UAbrlkyp_kob9LFgfGI1CUWXo/edit
 
 ---
 
 ## What it does
 
 - Create, read, update and delete products from a clean interface  
-- Frontend communicates with a deployed REST API (not local anymore)  
+- Frontend communicates with a deployed REST API  
 - Real-time stats (total products, total value)  
 - Error handling for network/server failures  
 - Delete confirmation to avoid accidental data loss  
-- Data is stored and synced using Firebase (Firestore)  
+- Data persistence using Firebase (Firestore)  
 - Logging middleware captures incoming requests  
+- **Webhook integration with n8n for real-time automation**  
+- **Automatic sync of data into Google Sheets**  
 
 ---
 
@@ -32,13 +35,16 @@ This started as a university exercise. At first, the goal was just to go beyond 
 | Backend | Node.js, Express |
 | Frontend | Vanilla JS, HTML, CSS |
 | Database | Firebase (Firestore) |
+| Automation | n8n (Webhooks + Workflows) |
 | Backend Deployment | Render |
 | Frontend Deployment | Vercel |
+| Automation Hosting | Railway |
 | Logging | Custom middleware logger |
 
 ---
 
 ## Project structure
+
 
 
 ├── src/
@@ -67,10 +73,22 @@ This started as a university exercise. At first, the goal was just to go beyond 
 ## How it works
 
 - The frontend sends HTTP requests using `fetch()` to the deployed API  
-- The Express backend handles routing and validation  
+- The Express backend handles routing, validation and business logic  
 - Controllers interact with Firebase using the Admin SDK  
 - Data is stored in a Firestore collection (`items`)  
+- A webhook is triggered on item creation  
+- n8n receives the webhook and processes the data  
+- The workflow automatically stores the data into Google Sheets  
 - Responses are returned as JSON and rendered dynamically in the UI  
+
+---
+
+## Automation Flow (n8n)
+
+1. Item is created via API (POST /items)  
+2. Backend sends data to an n8n webhook  
+3. n8n workflow processes the request  
+4. Data is mapped and inserted into Google Sheets  
 
 ---
 
@@ -88,33 +106,33 @@ cd Express-CRUD-API
 npm install
 
 # Start backend
-
 npm start
 
-# Then open frontend
-
-// front/index.html in your browser
+# Open frontend
+front/index.html
 
 
 ## Enviroment variables 
 
 For deployment, Firebase credentials are handled using environment variables instead of local JSON files:
 
-FIREBASE_PROJECT_ID= "YOUR_KEY",
-FIREBASE_CLIENT_EMAIL= "YOUR_EMAIL",
-FIREBASE_PRIVATE_KEY= "YOUR_KEY"
+FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
+FIREBASE_CLIENT_EMAIL=YOUR_EMAIL
+FIREBASE_PRIVATE_KEY=YOUR_KEY
 ```
 
 ---
 
 ## What I improved from the initial version
 
-  Deployed backend to production (Render)
+- Deployed backend to production (Render)
 - Deployed frontend (Vercel)
-- Connected frontend to a live API instead of localhost
+- Connected frontend to a live API
 - Moved Firebase credentials to environment variables
-- Handled CORS issues between frontend and backend
+- Handled CORS issues
 - Structured project for real-world usage
+- Implemented webhook-based automation with n8n
+- Integrated external services (Google Sheets)
 
 
 ---
@@ -122,10 +140,10 @@ FIREBASE_PRIVATE_KEY= "YOUR_KEY"
 ## What I'd improve next
 
 - Add authentication (users & roles)
-- Input validation on backend (Joi / Zod)
+- Input validation (Joi / Zod)
 - Pagination & filtering
-- Better UI/UX (loading states, feedback)
-- Add automation workflows with n8n
+- Better UI/UX
+- Event-based architecture (queues / async processing)
 
 ---
 
