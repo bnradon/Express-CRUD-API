@@ -24,7 +24,7 @@ exports.createItem = async (req, res) => {
   const ref = await collection.add({ name, price: Number(price) });
 
   try {
-    await fetch("https://n8n-production-5758.up.railway.app/webhook-test/prueba", {
+    await fetch("https://n8n-production-5758.up.railway.app/webhook/prueba", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: ref.id, name, price: Number(price) })
