@@ -1,53 +1,63 @@
-const db = require("../utils/firebase");
-const collection = db.collection("items");
+const itemService = require("../services/items.service");
 
 exports.getItems = async (req, res) => {
-  const snapshot = await collection.get();
-  const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  const items = await itemService.getItems();
+
   res.json(items);
 };
 
 exports.getItemById = async (req, res) => {
-  const doc = await collection.doc(req.params.id).get();
-  if (!doc.exists) return res.status(404).json({ message: "No encontrado" });
-  res.json({ id: doc.id, ...doc.data() });
+
+  const item = await itemService.getItemById(req.params.id);
+
+  if (!item) {
+    return res.status(404).json({
+      message: "No encontrado"
+    });
+  }
+
+  res.json(item);
 };
 
 exports.createItem = async (req, res) => {
-  console.log("Creando ítem...");
+
   const { name, price } = req.body;
 
   if (!name || !price) {
-    return res.status(400).json({ message: "Nombre y precio son obligatorios" });
-  }
-
-  const ref = await collection.add({ name, price: Number(price) });
-
-  try {
-    await fetch("https://n8n-production-5758.up.railway.app/webhook/prueba", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: ref.id, name, price: Number(price) })
+    return res.status(400).json({
+      message: "Nombre y precio obligatorios"
     });
-    console.log("Webhook enviado");
-  } catch (err) {
-    console.error("Error n8n:", err);
   }
 
+  const item = await itemService.createItem(req.body);
 
-  res.status(201).json({ id: ref.id, name, price: Number(price) });
+  res.status(201).json(item);
 };
-
 
 exports.updateItem = async (req, res) => {
+
   const { name, price } = req.body;
-  if (!name || !price) return res.status(400).json({ message: "Nombre y precio son obligatorios" });
-  await collection.doc(req.params.id).update({ name, price: Number(price) });
-  res.json({ id: req.params.id, name, price: Number(price) });
+
+  if (!name || !price) {
+    return res.status(400).json({
+      message: "Nombre y precio obligatorios"
+    });
+  }
+
+  const item = await itemService.updateItem(
+    req.params.id,
+    req.body
+  );
+
+  res.json(item);
 };
 
-
 exports.deleteItem = async (req, res) => {
-  await collection.doc(req.params.id).delete();
-  res.json({ message: "Eliminado correctamente" });
+
+  await itemService.deleteItem(req.params.id);
+
+  res.json({
+    message: "Eliminado correctamente"
+  });
 };
