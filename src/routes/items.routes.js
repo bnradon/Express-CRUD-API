@@ -8,7 +8,8 @@ const {
   getItemById,
   createItem,
   updateItem,
-  deleteItem
+  deleteItem,
+  updateItemAI
   
 } = require("../controllers/items.controllers");
 
@@ -17,5 +18,6 @@ router.get("/:id", getItemById);
 router.post("/", createItem);
 router.put("/:id", updateItem);
 router.delete("/:id", deleteItem);
+router.put("/:id/ai", updateItemAI);
 
 module.exports = router;

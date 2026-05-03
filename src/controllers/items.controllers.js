@@ -61,3 +61,40 @@ exports.deleteItem = async (req, res) => {
     message: "Eliminado correctamente"
   });
 };
+
+//Update AI
+
+exports.updateItemAI = async (req, res) => {
+
+  try {
+      
+    const { category, tags, shortSummary, improvedDescription } = req.body;
+
+  await collection.doc(req.params.id).update({
+
+    ai: {
+      category,
+      tags,
+      shortSummary,
+      improvedDescription
+    },
+
+    automation:{
+      status: "completed",
+      processedAt: new Date().toString()
+    }
+  });
+
+  res.json({message: "AI enrichment updated"});
+
+
+  } catch (error) {
+      console.error(err);
+
+    res.status(500).json({
+      message: "Error updating AI enrichment"
+    });
+  }
+  
+
+};

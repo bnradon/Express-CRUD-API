@@ -15,9 +15,10 @@ exports.createItem = async (data) => {
     name: data.name,
     price: Number(data.price),
 
+    createdAt: new Date().toISOString(),
+
     automation: {
-      status: "pending",
-      createdAt: new Date().toISOString()
+    status: "processing"
     }
   };
 
